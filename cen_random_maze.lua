@@ -2,11 +2,11 @@
 --// VARS
 --///////////////////////////////////////////////////////////////
 
-local set_start_position = false
+local corridor_size = 4
 
 local front_current_x = 0
 local front_current_y = 0
-local has_front = true
+
 local pass_current_x = 0
 local pass_current_y = 0
 
@@ -23,10 +23,10 @@ function cen_random_maze(map_size, map)
 	local function map_gen()
     return
     {
-    ttype = "clear",
-    frontier = "off", -- off, on, checked
-    current = "off",
-    x = 0, y = 0, w = 45, h = 45, item = 0
+      ttype = "clear",
+      frontier = "off", -- off, on, checked
+      current = "off",
+      x = 0, y = 0, w = 45, h = 45, item = 0
     }
 	end
 
@@ -51,9 +51,11 @@ function cen_random_maze(map_size, map)
 	end
 
 	-- call add frontier - INCREASE CORRIDOR SIZE HERE [1]
-	local function call_add_frontier()
-    add_frontier(pass_current_y-4,pass_current_x); add_frontier(pass_current_y,pass_current_x-4)
-    add_frontier(pass_current_y,pass_current_x+4); add_frontier(pass_current_y+4,pass_current_x)
+	local function call_add_frontier(size)
+    add_frontier(pass_current_y-size,pass_current_x)
+    add_frontier(pass_current_y,pass_current_x-size)
+    add_frontier(pass_current_y,pass_current_x+size)
+    add_frontier(pass_current_y+size,pass_current_x)
 	end
   
 	-- add neibour
@@ -94,23 +96,23 @@ function cen_random_maze(map_size, map)
       map_stack[1][1] = front_current_y
       map_stack[1][2] = front_current_x
 
-      -- making block free - top - left - right - bottom - ALMENTA LARGURA DOS CORREDORES AQUI [2]
+      -- making block free - top - left - right - bottom - INCREASE CORRIDOR SIZE HERE[2]
       if front_current_y < pass_current_y then
-        add_neibor(pass_current_y-1,pass_current_x) 
-        add_neibor(pass_current_y-2,pass_current_x)
-        add_neibor(pass_current_y-3,pass_current_x)
+        for i=1, corridor_size-1 do 
+          add_neibor(pass_current_y-i,pass_current_x) 
+        end
       elseif front_current_x < pass_current_x then
-        add_neibor(pass_current_y,pass_current_x-1)
-        add_neibor(pass_current_y,pass_current_x-2)
-        add_neibor(pass_current_y,pass_current_x-3)
+        for i=1, corridor_size-1 do 
+          add_neibor(pass_current_y,pass_current_x-i)
+        end
       elseif front_current_x > pass_current_x then
-        add_neibor(pass_current_y,pass_current_x+1)
-        add_neibor(pass_current_y,pass_current_x+2)
-        add_neibor(pass_current_y,pass_current_x+3)
+        for i=1, corridor_size-1 do 
+          add_neibor(pass_current_y,pass_current_x+i)
+        end
       elseif front_current_y > pass_current_y then
-        add_neibor(pass_current_y+1,pass_current_x)
-        add_neibor(pass_current_y+2,pass_current_x)
-        add_neibor(pass_current_y+3,pass_current_x)
+        for i=1, corridor_size-1 do 
+          add_neibor(pass_current_y+i,pass_current_x)
+        end
       end
     
     end
@@ -129,7 +131,7 @@ function cen_random_maze(map_size, map)
 
 	-- adding first frontier set
 	-- top // left // right // bottom
-	call_add_frontier()
+	call_add_frontier(corridor_size)
 
 	-- pick random frontier
 	random_frontier()
@@ -141,7 +143,7 @@ function cen_random_maze(map_size, map)
 	while #map_stack > 0 do
 
 		-- top // left // right // bottom
-		call_add_frontier()
+		call_add_frontier(corridor_size)
 
 		-- new current frontier
 		random_frontier()
@@ -154,7 +156,7 @@ function cen_random_maze(map_size, map)
 			pass_current_x = map_stack[1][2]
 
 			-- top // left // right // bottom
-			call_add_frontier()
+			call_add_frontier(corridor_size)
 
 			-- new current frontier
 			random_frontier()
