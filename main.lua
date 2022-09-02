@@ -22,10 +22,11 @@ bresenham = require 'libs/bresenham'
 --// IMPORT FILES
 --///////////////////////////////////////////////////////////////
 
-require '_state'
-require '_functions'
-require '_assets_db'
-require '_strings_db'
+-- globals
+require 'globals/_state'
+require 'globals/_functions'
+require 'globals/_assets_db'
+require 'globals/_strings_db'
 
 require 'range_data'
 require "colisions"
@@ -41,11 +42,11 @@ require "cen_random_maze"
 require "cen_a" 
 
 -- enemies
-require "enemy_test"
-require "enemy_alert"
-require "enemy_vision"
-require "enemy_counter"
-require "enemy_comp_coli"
+require "enemy/enemy_test"
+require "enemy/enemy_alert"
+require "enemy/enemy_vision"
+require "enemy/enemy_counter"
+require "enemy/enemy_base"
 
 require "turn"
 

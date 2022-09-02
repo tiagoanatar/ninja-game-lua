@@ -80,7 +80,7 @@ function cenario_a_load()
   state.cenario.global.tatame_num = love.math.random(1, 3)
 
   -- Carregando imagem da texura
-  texture_draw = love.graphics.newImage("imgs/cen/text_1.jpg")
+  texture_draw = love.graphics.newImage("assets/imgs/cen/text_1.jpg")
   texture_draw:setWrap("repeat", "repeat") -- repete no eixo x e y
 
   -- New Quad -- Posição x/y - tamanho do quad(bloco da imagem) -- tamanho da imagem puxada
