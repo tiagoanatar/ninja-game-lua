@@ -103,8 +103,8 @@ function items_load()
     -- 1 item_bomb
     {
       name = st_main.item.bomb,
-      img = love.graphics.newImage("imgs/item/item_bomb.png"),
-      img_final = love.graphics.newImage("imgs/item/explod_test.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_bomb.png"),
+      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
       q_ctl = 1, -- quad control
       x = 0,
       y = 0,
@@ -124,8 +124,8 @@ function items_load()
     -- 2 item_shuri
     {
       name = st_main.item.shuriken,
-      img = love.graphics.newImage("imgs/item/item_shuri.png"),
-      img_final = love.graphics.newImage("imgs/item/explod_test.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_shuri.png"),
+      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -141,8 +141,8 @@ function items_load()
     -- 3 item_sleep
     {
       name = st_main.item.sleep,
-      img = love.graphics.newImage("imgs/item/item_sleep.png"),
-      img_final = love.graphics.newImage("imgs/item/explod_test.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_sleep.png"),
+      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -158,7 +158,7 @@ function items_load()
     -- 4 item_gold
     {
       name = st_main.item.gold,
-      img = love.graphics.newImage("imgs/item/item_gold.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_gold.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -173,7 +173,7 @@ function items_load()
     -- 5 item_makibishi
     {
       name = st_main.item.makib,
-      img = love.graphics.newImage("imgs/item/item_makibishi.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_makibishi.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -188,7 +188,7 @@ function items_load()
     -- 6 item_smoke
     {
       name = st_main.item.smoke,
-      img = love.graphics.newImage("imgs/item/item_smoke.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_smoke.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -206,8 +206,8 @@ function items_load()
     -- 7 item_armor
     {
       name = st_main.item.armor,
-      img = love.graphics.newImage("imgs/item/item_armor.png"),
-      img_use = love.graphics.newImage("imgs/item/item_armor_use.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_armor.png"),
+      img_use = love.graphics.newImage("assets/imgs/item/item_armor_use.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -222,7 +222,7 @@ function items_load()
     -- 8 item_poison
     {
       name = st_main.item.poison,
-      img = love.graphics.newImage("imgs/item/item_poison.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_poison.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -234,7 +234,7 @@ function items_load()
     -- 9 item_potion
     {
       name = st_main.item.poti,
-      img = love.graphics.newImage("imgs/item/item_potion.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_potion.png"),
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -246,7 +246,7 @@ function items_load()
     -- 10 item_rope
     {
       name = st_main.item.rope,
-      img = love.graphics.newImage("imgs/item/item_rope.png"),
+      img = love.graphics.newImage("assets/imgs/item/item_rope.png"),
       q_ctl = 1,
       x = 0,
       y = 0,

@@ -20,9 +20,9 @@ local alpha_grow_03 = 0
 function cenario_intro_load()
  
  -- Imagem principal do start
-start_0 = love.graphics.newImage("imgs/start/logos_inicio_00.png")
-start_01 = love.graphics.newImage("imgs/start/logos_inicio_01.png")
-start = love.graphics.newImage("imgs/start/start_sprite.png")
+start_0 = love.graphics.newImage("assets/imgs/start/logos_inicio_00.png")
+start_01 = love.graphics.newImage("assets/imgs/start/logos_inicio_01.png")
+start = love.graphics.newImage("assets/imgs/start/start_sprite.png")
 
 -- Tela de start -- Quad dos sprites
 start_quad = love.graphics.newQuad(0, 0, 1200, 700, start:getWidth(), start:getHeight())

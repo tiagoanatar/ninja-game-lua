@@ -30,18 +30,18 @@ floor_rand = love.math.random(1, 3)
             clear = {
               
                 floor = {
-                love.graphics.newImage("imgs/cen/dojo/tatame_1.png"),
-                love.graphics.newImage("imgs/cen/dojo/tatame_2.png"),
-                love.graphics.newImage("imgs/cen/dojo/tatame_3.png")
+                love.graphics.newImage("assets/imgs/cen/dojo/tatame_1.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/tatame_2.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/tatame_3.png")
                 },
               
                 elements = {
                   
                     -- 1 - bed
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/bed_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/bed_b.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/bed_c.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/bed_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/bed_b.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/bed_c.png")
                     }
                 }
             },
@@ -49,56 +49,56 @@ floor_rand = love.math.random(1, 3)
             wall = {
               
                 top = {
-                love.graphics.newImage("imgs/cen/dojo/s_parede_1.png"),
-                love.graphics.newImage("imgs/cen/dojo/s_parede_2.png"),
-                love.graphics.newImage("imgs/cen/dojo/s_parede_3.png")
+                love.graphics.newImage("assets/imgs/cen/dojo/s_parede_1.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/s_parede_2.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/s_parede_3.png")
                 },
               
                 low = {
-                love.graphics.newImage("imgs/cen/dojo/v_parede_1.png"),
-                love.graphics.newImage("imgs/cen/dojo/v_parede_2.png"),
-                love.graphics.newImage("imgs/cen/dojo/v_parede_3.png")
+                love.graphics.newImage("assets/imgs/cen/dojo/v_parede_1.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/v_parede_2.png"),
+                love.graphics.newImage("assets/imgs/cen/dojo/v_parede_3.png")
                 },
               
                 elements = {
                     -- 1 - lamp
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/lamp_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/lamp_b.png"), -- REMOVE/MOVE
-                    love.graphics.newImage("imgs/cen/dojo/elements/lamp_c.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/lamp_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/lamp_b.png"), -- REMOVE/MOVE
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/lamp_c.png")
                     },
                   
                     -- 2 - armor 
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/armor_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/armor_b.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/armor_c.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/armor_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/armor_b.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/armor_c.png")
                     },
             
                     -- 3 - sword
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/sword_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/sword_b.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/sword_c.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/sword_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/sword_b.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/sword_c.png")
                     },
             
                     -- 4 - paint
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/pint_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/pint_b.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/pint_c.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/pint_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/pint_b.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/pint_c.png")
                     },
               
                     -- 5 - box
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/box_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/box_b.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/box_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/box_b.png")
                     },
                   
                     -- 6 - box
                     {
-                    love.graphics.newImage("imgs/cen/dojo/elements/box_a.png"),
-                    love.graphics.newImage("imgs/cen/dojo/elements/box_b.png")
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/box_a.png"),
+                    love.graphics.newImage("assets/imgs/cen/dojo/elements/box_b.png")
                     }
               
                 }
