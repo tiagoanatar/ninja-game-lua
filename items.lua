@@ -1,5 +1,5 @@
 -- ///////////////////////////////////////////////////////////////
---// VARIAVEIS
+--// VARS
 --///////////////////////////////////////////////////////////////
 
 local item_combat_active = false
@@ -15,52 +15,21 @@ local emission_rate = 1 -- used in item 6(smoke)
 
 local anim_player_life_ref
 
--- calculando a margem correta
+-- calc correct margins
 local text_margin = 0
 local font = love.graphics.getFont()
-local text_w = 0 -- coletar tamanho do texto
+local text_w = 0 -- get font size
 
 -- ///////////////////////////////////////////////////////////////
 --// LOCAL SUPPORT FUNCTIONS
 --///////////////////////////////////////////////////////////////
 
--- cria variaveis de cada tabela - tabela de colisao
+-- factory function
 local function tab_add()
   return {x = 0, y = 0, w = 45, h = 45, item = "name"}
 end
 
--- movimento do quadrado de item
-local function item_box_move()
-  
-  if key_l and key_r == false and key_u == false and key_d == false and state.player.item_click == "off" and colisao_main(state.player.i_box,-45,0) == 1 then
-    state.player.i_box.x = state.player.i_box.x - 45
-    state.player.item_click = "on"
-  end   
-  if key_r and key_l == false and key_u == false and key_d == false and state.player.item_click == "off" and colisao_main(state.player.i_box,45,0) == 1 then
-    state.player.i_box.x = state.player.i_box.x + 45
-    state.player.item_click = "on"
-  end  
-  if key_u and key_l == false and key_r == false and key_d == false and state.player.item_click == "off" and colisao_main(state.player.i_box,0,-45) == 1 then
-    state.player.i_box.y = state.player.i_box.y - 45
-    state.player.item_click = "on"
-  end
-  if key_d and key_l == false and key_r == false and key_u == false and state.player.item_click == "off" and colisao_main(state.player.i_box,0,45) == 1 then
-    state.player.i_box.y = state.player.i_box.y + 45
-    state.player.item_click = "on"
-  end  
-    
-  -- liberando movimento
-  if key_l == false and key_r == false and key_u == false and key_d == false then 
-    state.player.item_click = "off"
-  end
-  --
-
-  -- mouse box move
-  func:mouse_action_box_update(state.player.i_box)
-    
-end
-
--- gasto do uso do player
+-- reduce item total usage
 local function item_gasto(index)
 
   state.player.i_max_use = state.player.i_max_use - 1
@@ -81,8 +50,8 @@ end
 --// ITEMS LOAD
 --///////////////////////////////////////////////////////////////
 
--- estados do item[x].use: off, on, using(items de lancar), active(items de usar como armadura or that stay for some time(animation)) 
--- estados do item[x].drop: off, floor, enemy 
+-- states of item[x].use: off, on, using(items like bomb/shuriken), active(items like armor or that stay for some time(animation)) 
+-- states of item[x].drop: off, floor, enemy 
 
 function items_load()
   
@@ -103,12 +72,11 @@ function items_load()
     -- 1 item_bomb
     {
       name = st_main.item.bomb,
-      img = love.graphics.newImage("assets/imgs/item/item_bomb.png"),
-      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
+      img = asset.item.bomb,
       q_ctl = 1, -- quad control
       x = 0,
       y = 0,
-      qtd = 2, -- quantidade
+      qtd = 2, -- quantity
       use = "off",
       --
       drop = "off",
@@ -124,8 +92,7 @@ function items_load()
     -- 2 item_shuri
     {
       name = st_main.item.shuriken,
-      img = love.graphics.newImage("assets/imgs/item/item_shuri.png"),
-      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
+      img = asset.item.shuriken,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -141,8 +108,7 @@ function items_load()
     -- 3 item_sleep
     {
       name = st_main.item.sleep,
-      img = love.graphics.newImage("assets/imgs/item/item_sleep.png"),
-      img_final = love.graphics.newImage("assets/imgs/item/explod_test.png"),
+      img = asset.item.sleep,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -158,7 +124,7 @@ function items_load()
     -- 4 item_gold
     {
       name = st_main.item.gold,
-      img = love.graphics.newImage("assets/imgs/item/item_gold.png"),
+      img = asset.item.gold,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -173,7 +139,7 @@ function items_load()
     -- 5 item_makibishi
     {
       name = st_main.item.makib,
-      img = love.graphics.newImage("assets/imgs/item/item_makibishi.png"),
+      img = asset.item.makib,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -188,7 +154,7 @@ function items_load()
     -- 6 item_smoke
     {
       name = st_main.item.smoke,
-      img = love.graphics.newImage("assets/imgs/item/item_smoke.png"),
+      img = asset.item.smoke,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -206,8 +172,8 @@ function items_load()
     -- 7 item_armor
     {
       name = st_main.item.armor,
-      img = love.graphics.newImage("assets/imgs/item/item_armor.png"),
-      img_use = love.graphics.newImage("assets/imgs/item/item_armor_use.png"),
+      img = asset.item.armor,
+      img_use = asset.item.smoke,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -222,7 +188,7 @@ function items_load()
     -- 8 item_poison
     {
       name = st_main.item.poison,
-      img = love.graphics.newImage("assets/imgs/item/item_poison.png"),
+      img = asset.item.poison,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -234,7 +200,7 @@ function items_load()
     -- 9 item_potion
     {
       name = st_main.item.poti,
-      img = love.graphics.newImage("assets/imgs/item/item_potion.png"),
+      img = asset.item.poti,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -246,7 +212,7 @@ function items_load()
     -- 10 item_rope
     {
       name = st_main.item.rope,
-      img = love.graphics.newImage("assets/imgs/item/item_rope.png"),
+      img = asset.item.rope,
       q_ctl = 1,
       x = 0,
       y = 0,
@@ -371,17 +337,12 @@ function items_draw_use()
       love.graphics.setColor(1, 0.1, 0.1, 0.3)
       love.graphics.rectangle("fill", state.player.i_box.x, state.player.i_box.y, 45, 45)
       -- movimento da item box
-      item_box_move()
+      func:mouse_action_box_update(state.player.i_box)
     end
     -- drop floor
     if item[temp_index].drop == "floor" and temp_index ~= 6 then
       item[temp_index].drop = "off"
       item[temp_index].use = "off"
-    end
-    -- drop  -- GENERICO DE TESTES, depois mudar
-    if item_combat_active == true and item[temp_index].drop == "enemy" then
-      love.graphics.setColor(1, 1, 1, 1) -- normalizador de cor
-      --love.graphics.draw(item[2].img_final, item[temp_index].drop_p.x, item[temp_index].drop_p.y, 0, 1, 1)  
     end
   end -- temp index
 

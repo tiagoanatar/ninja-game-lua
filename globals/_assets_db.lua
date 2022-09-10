@@ -65,6 +65,19 @@ function assets()
       alert_spleep = love.graphics.newImage("assets/imgs/particles/enemy-spleep.png"),
       alert_base = love.graphics.newImage("assets/imgs/particles/enemy-alert-black.png"),
     },
+
+    item = {
+      bomb = love.graphics.newImage("assets/imgs/item/item_bomb.png"),
+      shuriken = love.graphics.newImage("assets/imgs/item/item_shuri.png"),
+      sleep = love.graphics.newImage("assets/imgs/item/item_sleep.png"),
+      gold = love.graphics.newImage("assets/imgs/item/item_gold.png"),
+      makib = love.graphics.newImage("assets/imgs/item/item_makibishi.png"),
+      smoke = love.graphics.newImage("assets/imgs/item/item_smoke.png"),
+      armor = love.graphics.newImage("assets/imgs/item/item_armor.png"),
+      poison = love.graphics.newImage("assets/imgs/item/item_poison.png"),
+      poti = love.graphics.newImage("assets/imgs/item/item_potion.png"),
+      rope = love.graphics.newImage("assets/imgs/item/item_rope.png"),
+    },
     
   }
   
