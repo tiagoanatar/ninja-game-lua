@@ -75,17 +75,17 @@ function love.load()
   -- cen design
   cen_design_load()
 
-  -- assents
+  -- assets
   assets()
 
-  -- botoes - turnos
+  -- turns and ui
   turn_load()
 
   -- items
   items_load()
 
-  -- cursor do mouse
-  -- love.mouse.setVisible(false) -- esconde o mouse atual
+  -- mouse cursor
+  -- love.mouse.setVisible(false)
 
   -- cenarios
   cenario_intro_load(dt) -- intro

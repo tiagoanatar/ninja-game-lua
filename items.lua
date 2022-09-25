@@ -10,7 +10,7 @@ local enemy_ref = state.enemy.list
 local cont_x
 local cont_y 
 
-local temp_index = 0 -- used in items 3 e 4
+local temp_index = 1 -- used in items 3 e 4
 local emission_rate = 1 -- used in item 6(smoke)
 
 local anim_player_life_ref
@@ -31,19 +31,15 @@ end
 
 -- reduce item total usage
 local function item_gasto(index)
-
   state.player.i_max_use = state.player.i_max_use - 1
   item[index].qtd = item[index].qtd - 1
-
 end
 
 -- i_box_reset
 local function i_box_reset()
-  
   -- igualando a item box com posicao do player
   state.player.i_box.x = state.player.x
   state.player.i_box.y = state.player.y
-    
 end
 
 -- ///////////////////////////////////////////////////////////////
@@ -429,9 +425,6 @@ end
 
 function items_use()
   
-  -- resetando
-  --temp_index = 0
-
   -- 1, 2, 3, 4, 5 and 6 - item_bomb, item_gold and makibishi ...etc
   -----
   for x = 1, 6 do
@@ -442,7 +435,7 @@ function items_use()
   end
 
   -- range item + key press use
-  if temp_index > 0 and item[temp_index].use == "using" and love.mouse.isDown(1) then
+  if item[temp_index].use == "using" and love.mouse.isDown(1) then
     for y,v in ipairs(grid_global) do
       for x,w in ipairs(grid_global[y]) do
 
