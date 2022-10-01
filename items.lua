@@ -32,7 +32,7 @@ end
 -- reduce item total usage
 local function item_gasto(index)
   state.player.i_max_use = state.player.i_max_use - 1
-  item[index].qtd = item[index].qtd - 1
+  state.item.list[index].qtd = state.item.list[index].qtd - 1
 end
 
 -- i_box_reset
@@ -46,177 +46,14 @@ end
 --// ITEMS LOAD
 --///////////////////////////////////////////////////////////////
 
--- states of item[x].use: off, on, using(items like bomb/shuriken), active(items like armor or that stay for some time(animation)) 
--- states of item[x].drop: off, floor, enemy 
+-- states of state.item.list[x].use: off, on, using(items like bomb/shuriken), active(items like armor or that stay for some time(animation)) 
+-- states of state.item.list[x].drop: off, floor, enemy 
 
 function items_load()
-  
-  -- quad
-  item_quad = {
-    love.graphics.newQuad(0, 0, 76, 76, 228, 76),
-    love.graphics.newQuad(76, 0, 76, 76, 228, 76),
-    love.graphics.newQuad(152, 0, 76, 76, 228, 76)
-  }
 
   item_size = {
     w = 76,
     h = 76
-  }
-
-  item = {
-
-    -- 1 item_bomb
-    {
-      name = st_main.item.bomb,
-      img = asset.item.bomb,
-      q_ctl = 1, -- quad control
-      x = 0,
-      y = 0,
-      qtd = 2, -- quantity
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0},
-      drop_enemy_i = 0,
-      --
-      dura = 1,
-      dura_ref = 1,
-      dura_control = "off"
-    },
-    --
-
-    -- 2 item_shuri
-    {
-      name = st_main.item.shuriken,
-      img = asset.item.shuriken,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 2,
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0},
-      drop_enemy_i = 0
-    },
-    --
-
-    -- 3 item_sleep
-    {
-      name = st_main.item.sleep,
-      img = asset.item.sleep,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 8,
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0},
-      drop_enemy_i = 0
-    },
-    --
-
-    -- 4 item_gold
-    {
-      name = st_main.item.gold,
-      img = asset.item.gold,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 2,
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0}
-    },
-    --
-
-    -- 5 item_makibishi
-    {
-      name = st_main.item.makib,
-      img = asset.item.makib,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 2,
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0}
-    },
-    --
-
-    -- 6 item_smoke
-    {
-      name = st_main.item.smoke,
-      img = asset.item.smoke,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 4,
-      use = "off",
-      --
-      drop = "off",
-      drop_p = {x = 0, y = 0},
-      dura = 2,
-      dura_ref = 2,
-      dura_control = "off"
-    },
-    --
-
-    -- 7 item_armor
-    {
-      name = st_main.item.armor,
-      img = asset.item.armor,
-      img_use = asset.item.smoke,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 4,
-      use = "off", 
-      --
-      power = 0, 
-      dura = 3
-    },
-    --
-
-    -- 8 item_poison
-    {
-      name = st_main.item.poison,
-      img = asset.item.poison,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 4,
-      use = "off"
-    },
-    --
-
-    -- 9 item_potion
-    {
-      name = st_main.item.poti,
-      img = asset.item.poti,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 3,
-      use = "off"
-    },
-    --
-
-    -- 10 item_rope
-    {
-      name = st_main.item.rope,
-      img = asset.item.rope,
-      q_ctl = 1,
-      x = 0,
-      y = 0,
-      qtd = 4,
-      use = "off"
-    }
-    --
-
   }
 
 end
@@ -235,9 +72,9 @@ function items_reset()
   state.item.use = false
   
   -- resetando itens nao "active"
-  for i,v in ipairs(item) do
-    if item[i].use ~= "active" then  
-      item[i].use = "off" 
+  for i,v in ipairs(state.item.list) do
+    if state.item.list[i].use ~= "active" then  
+      state.item.list[i].use = "off" 
     end
   end
   
@@ -248,7 +85,7 @@ end
 --///////////////////////////////////////////////////////////////
 
 function items_draw_menu()  
-  for i,v in ipairs(item) do
+  for i,v in ipairs(state.item.list) do
     
     -- posicao 
     -----
@@ -256,64 +93,64 @@ function items_draw_menu()
     cont_x = (i - 1) % 5 * 115
 
     -- atualizando x e y
-    item[i].x = sub_tela_x + cont_x + 50
-    item[i].y = sub_tela_y + 30
+    state.item.list[i].x = sub_tela_x + cont_x + 50
+    state.item.list[i].y = sub_tela_y + 30
         
     -- controle do y
-    if i > 5 then item[i].y = sub_tela_y + 190 end
+    if i > 5 then state.item.list[i].y = sub_tela_y + 190 end
       
     -- draw img
     -----
     love.graphics.setColor(1, 1, 1, 1) -- normalizador de cor
-    if item[i].qtd == 0 then love.graphics.setColor(1, 1, 1, 0.5) end
+    if state.item.list[i].qtd == 0 then love.graphics.setColor(1, 1, 1, 0.5) end
 
-    -- imprimindo item
-    love.graphics.draw(item[i].img, item_quad[item[i].q_ctl], item[i].x, item[i].y, 0, 1, 1)
+    -- print item
+    love.graphics.draw(state.item.list[i].img, state.item.quad[state.item.list[i].q_ctl], state.item.list[i].x, state.item.list[i].y, 0, 1, 1)
 
     -- draw text 
     -----
     love.graphics.setColor(1, 1, 1, 0.4) -- normalizador de cor
 
-    -- coletar tamanho do texto
-    text_w = font:getWidth(item[i].name)
+    -- get text size
+    text_w = font:getWidth(state.item.list[i].name)
 
     -- calculando a margem correta
     text_margin = (item_size.w - text_w) / 2 
 
     -- imprime texto
     love.graphics.setFont(asset.fonts.f1)
-    love.graphics.print(item[i].name, item[i].x + text_margin, item[i].y + 85, 0, 1, 1)
+    love.graphics.print(state.item.list[i].name, state.item.list[i].x + text_margin, state.item.list[i].y + 85, 0, 1, 1)
 
     -- imprime number
     love.graphics.setColor(1, 1, 1, 1) 
-    love.graphics.print(item[i].qtd, item[i].x + 34, item[i].y + 104, 0, 1, 1)
+    love.graphics.print(state.item.list[i].qtd, state.item.list[i].x + 34, state.item.list[i].y + 104, 0, 1, 1)
 
     -- retangulo do numero
     love.graphics.setColor(0.2, 0.2, 0.2, 1)
-    love.graphics.rectangle("fill", item[i].x + 28, item[i].y + 120, 20, 5)
+    love.graphics.rectangle("fill", state.item.list[i].x + 28, state.item.list[i].y + 120, 20, 5)
 
     -- hover
     -----
     -- checando se mouse bate em item
-    if wm.x >= item[i].x 
-    and wm.x < item[i].x + item_size.w
-    and wm.y >= item[i].y 
-    and wm.y < item[i].y + item_size.h
-    and item[i].qtd > 0 then
+    if wm.x >= state.item.list[i].x 
+    and wm.x < state.item.list[i].x + item_size.w
+    and wm.y >= state.item.list[i].y 
+    and wm.y < state.item.list[i].y + item_size.h
+    and state.item.list[i].qtd > 0 then
 
-      item[i].q_ctl = 2
-      if love.mouse.isDown(1) and item[i].use == "off" then
-          item[i].use = "on"
+      state.item.list[i].q_ctl = 2
+      if love.mouse.isDown(1) and state.item.list[i].use == "off" then
+          state.item.list[i].use = "on"
           state.item.use = true
       end
       
     else
-        item[i].q_ctl = 1
+        state.item.list[i].q_ctl = 1
     end
 
     -- escurecendo caso o item esteja vazio
-    if item[i].qtd == 0 then
-        item[i].q_ctl = 3
+    if state.item.list[i].qtd == 0 then
+        state.item.list[i].q_ctl = 3
     end
     
   end -- FOR end
@@ -329,39 +166,39 @@ function items_draw_use()
   -----
   if temp_index > 0 then
     -- guide box draw
-    if item[temp_index].use == "using" then
+    if state.item.list[temp_index].use == "using" then
       love.graphics.setColor(1, 0.1, 0.1, 0.3)
       love.graphics.rectangle("fill", state.player.i_box.x, state.player.i_box.y, 45, 45)
       -- movimento da item box
       func:mouse_action_box_update(state.player.i_box)
     end
     -- drop floor
-    if item[temp_index].drop == "floor" and temp_index ~= 6 then
-      item[temp_index].drop = "off"
-      item[temp_index].use = "off"
+    if state.item.list[temp_index].drop == "floor" and temp_index ~= 6 then
+      state.item.list[temp_index].drop = "off"
+      state.item.list[temp_index].use = "off"
     end
   end -- temp index
 
   -- 1 item_bomb
   -----
-  if item[1].use == "active" then
-    item[temp_index].drop = "off"
+  if state.item.list[1].use == "active" then
+    state.item.list[temp_index].drop = "off"
     
     -- active animation
-    if item[temp_index].dura_control == "off" and item[temp_index].use == "active" then 
+    if state.item.list[temp_index].dura_control == "off" and state.item.list[temp_index].use == "active" then 
       if p_explosion_2.emit < 40 then 
         p_explosion_2.emit = p_explosion_2.emit + 2
       else
-        item[temp_index].dura_control = "on"
+        state.item.list[temp_index].dura_control = "on"
       end
     end
     
     -- inactive animation
-    if item[temp_index].dura_control == "on" then 
+    if state.item.list[temp_index].dura_control == "on" then 
       p_explosion_2.emit = p_explosion_2.emit - 0.5
       if p_explosion_2.emit == 0 then 
-        item[temp_index].use = "off" 
-        item[temp_index].dura_control = "off"            
+        state.item.list[temp_index].use = "off" 
+        state.item.list[temp_index].dura_control = "off"            
       else
       end
     end
@@ -371,36 +208,36 @@ function items_draw_use()
     p_explosion_2.p:start()
   for step = 1, 40 do p_explosion_2.p:update(0.0013020569458604) end
     p_explosion_2.p:emit(p_explosion_2.emit)
-    particle_draw(p_explosion_2.p, item[temp_index].drop_p.x+20, item[temp_index].drop_p.y+20)
+    particle_draw(p_explosion_2.p, state.item.list[temp_index].drop_p.x+20, state.item.list[temp_index].drop_p.y+20)
           
     p_explosion_1.p:start()
     p_explosion_1.p:emit(119)
-    particle_draw(p_explosion_1.p, item[temp_index].drop_p.x+20, item[temp_index].drop_p.y+20)
+    particle_draw(p_explosion_1.p, state.item.list[temp_index].drop_p.x+20, state.item.list[temp_index].drop_p.y+20)
 
   end
 
   -- 6 item_smoke
   -----
-  if item[6].use == "active" then
-    item[6].drop = "off"
-    if item[6].dura > 0 then 
+  if state.item.list[6].use == "active" then
+    state.item.list[6].drop = "off"
+    if state.item.list[6].dura > 0 then 
       if emission_rate < 233 then emission_rate = emission_rate + 50 end
       p_neblina.p:setEmissionRate(emission_rate) 
     end
     
-    particle_draw(p_neblina.p, item[6].drop_p.x, item[6].drop_p.y)
+    particle_draw(p_neblina.p, state.item.list[6].drop_p.x, state.item.list[6].drop_p.y)
   end
 
   -- 7 item_armor
   -----
-  if item[7].use == "active" then
-    if item[7].dura == 3 then
+  if state.item.list[7].use == "active" then
+    if state.item.list[7].dura == 3 then
       love.graphics.setColor(1, 1, 1, 1) -- normalizador de cor
-      love.graphics.draw(item[7].img_use, item_quad[1], camera.x +20 , camera.y + 150, 0, 1, 1)
-    elseif item[7].dura == 2 then  
-      love.graphics.draw(item[7].img_use, item_quad[2], camera.x +20 , camera.y + 150, 0, 1, 1)
-    elseif item[7].dura == 1 then
-      love.graphics.draw(item[7].img_use, item_quad[3], camera.x +20 , camera.y + 150, 0, 1, 1)
+      love.graphics.draw(state.item.list[7].img_use, item.quad[1], camera.x +20 , camera.y + 150, 0, 1, 1)
+    elseif state.item.list[7].dura == 2 then  
+      love.graphics.draw(state.item.list[7].img_use, item.quad[2], camera.x +20 , camera.y + 150, 0, 1, 1)
+    elseif state.item.list[7].dura == 1 then
+      love.graphics.draw(state.item.list[7].img_use, item.quad[3], camera.x +20 , camera.y + 150, 0, 1, 1)
     end
   end
 
@@ -410,8 +247,8 @@ function items_draw_use()
   for y,v in ipairs(grid_global) do
     for x,w in ipairs(grid_global) do
       for p = 1, 5 do
-        if grid_global[y][x].item == item[p].name then
-          love.graphics.draw(item[p].img, item_quad[1], grid_global[y][x].x + 10, grid_global[y][x].y + 10, 0, 0.3, 0.3)
+        if grid_global[y][x].item == state.item.list[p].name then
+          love.graphics.draw(state.item.list[p].img, item.quad[1], grid_global[y][x].x + 10, grid_global[y][x].y + 10, 0, 0.3, 0.3)
         end
       end
     end
@@ -428,26 +265,26 @@ function items_use()
   -- 1, 2, 3, 4, 5 and 6 - item_bomb, item_gold and makibishi ...etc
   -----
   for x = 1, 6 do
-    if item[x].use == "on" and love.mouse.isDown(1) == false then
-      item[x].use = "using"
+    if state.item.list[x].use == "on" and love.mouse.isDown(1) == false then
+      state.item.list[x].use = "using"
       temp_index = x
     end
   end
 
   -- range item + key press use
-  if item[temp_index].use == "using" and love.mouse.isDown(1) then
+  if state.item.list[temp_index].use == "using" and love.mouse.isDown(1) then
     for y,v in ipairs(grid_global) do
       for x,w in ipairs(grid_global[y]) do
 
         -- item on the floor
         if temp_index == 4 or temp_index == 5 or temp_index == 6 then
           if state.player.i_box.x == grid_global[y][x].x and state.player.i_box.y == grid_global[y][x].y and grid_global[y][x].ttype == "clear" then
-            item[temp_index].drop = "floor"
+            state.item.list[temp_index].drop = "floor"
             grid_global[y][x].ttype = "item"
-            grid_global[y][x].item = item[temp_index].name
+            grid_global[y][x].item = state.item.list[temp_index].name
             item_gasto(temp_index)
-            item[temp_index].drop_p.x = grid_global[y][x].x
-            item[temp_index].drop_p.y = grid_global[y][x].y
+            state.item.list[temp_index].drop_p.x = grid_global[y][x].x
+            state.item.list[temp_index].drop_p.y = grid_global[y][x].y
           end
         end
       
@@ -455,23 +292,23 @@ function items_use()
         if temp_index == 1 or temp_index == 2 or temp_index == 3 and combate_screen == "off" then
           if state.player.i_box.x == grid_global[y][x].x and state.player.i_box.y == grid_global[y][x].y and grid_global[y][x].ttype == "enemy" then
             
-            item[temp_index].drop = "enemy"  
-            item[temp_index].drop_p.x = grid_global[y][x].x
-            item[temp_index].drop_p.y = grid_global[y][x].y
+            state.item.list[temp_index].drop = "enemy"  
+            state.item.list[temp_index].drop_p.x = grid_global[y][x].x
+            state.item.list[temp_index].drop_p.y = grid_global[y][x].y
             item_gasto(temp_index)
 
             -- guardando informacao do inimigo
             for j,w in ipairs(enemy_ref) do 
-              if enemy_ref[j].x == item[temp_index].drop_p.x and enemy_ref[j].y == item[temp_index].drop_p.y then
-                item[temp_index].drop_enemy_i = j
+              if enemy_ref[j].x == state.item.list[temp_index].drop_p.x and enemy_ref[j].y == state.item.list[temp_index].drop_p.y then
+                state.item.list[temp_index].drop_enemy_i = j
               end
             end
             i_box_reset()
             
             -- bomb
             if temp_index == 1 then
-              item[1].use = "active"
-              item[1].dura = item[1].dura_ref
+              state.item.list[1].use = "active"
+              state.item.list[1].dura = state.item.list[1].dura_ref
             end
               
           end
@@ -482,20 +319,20 @@ function items_use()
 
   -- 6 item_smoke
   -----
-  if item[6].drop == "floor" then
+  if state.item.list[6].drop == "floor" then
 
-    item[6].use = "active"
-    item[6].dura = item[6].dura_ref
+    state.item.list[6].use = "active"
+    state.item.list[6].dura = state.item.list[6].dura_ref
     
   end
 
   -- 7 item_armor
   -----
-  if item[7].use == "on" then
+  if state.item.list[7].use == "on" then
     
-    item[7].power = 1
-    item[7].dura = 3
-    item[7].use = "active"
+    state.item.list[7].power = 1
+    state.item.list[7].dura = 3
+    state.item.list[7].use = "active"
     
     item_gasto(7)
     state.turn.current = state.turn.ttype.off
@@ -504,9 +341,9 @@ function items_use()
 
   -- 9 item_potion
   -----
-  if item[9].use == "on" then
+  if state.item.list[9].use == "on" then
     
-    item[9].use = "using"
+    state.item.list[9].use = "using"
     
     -- dano
     state.player.life = state.player.life + 3
@@ -528,7 +365,7 @@ function items_use()
     
     item_gasto(9)
     
-    item[9].use = "off"
+    state.item.list[9].use = "off"
     state.turn.current = state.turn.ttype.off
     
   end
@@ -557,25 +394,25 @@ function items_enemy_effect()
   if state.turn.current ~= state.turn.ttype.enemy then
         
     -- 1 bomb
-    if item[1].drop_enemy_i > 0 then
+    if state.item.list[1].drop_enemy_i > 0 then
       item_combat_active = true
-      co_en_ref = item[1].drop_enemy_i -- global var da folha combat.lua
-      item[1].drop_enemy_i = 0
+      co_en_ref = state.item.list[1].drop_enemy_i -- global var da folha combat.lua
+      state.item.list[1].drop_enemy_i = 0
     end
           
     -- 2 shuri
-    if item[2].drop_enemy_i > 0 then
+    if state.item.list[2].drop_enemy_i > 0 then
       item_combat_active = true
-      co_en_ref = item[2].drop_enemy_i -- global var da folha combat.lua
-      item[2].drop_enemy_i = 0
+      co_en_ref = state.item.list[2].drop_enemy_i -- global var da folha combat.lua
+      state.item.list[2].drop_enemy_i = 0
     end
         
     -- 3 - sleep
-    if item[3].drop_enemy_i > 0 then
-      local index = item[3].drop_enemy_i
+    if state.item.list[3].drop_enemy_i > 0 then
+      local index = state.item.list[3].drop_enemy_i
       enemy_ref[index].comp = "sleep"
       enemy_ref[index].change_comp = "off"
-      item[3].drop_enemy_i = 0
+      state.item.list[3].drop_enemy_i = 0
     end
 
   end
@@ -585,7 +422,7 @@ function items_enemy_effect()
     for j,w in ipairs(enemy_ref) do
       for y,v in ipairs(grid_global) do
         for x,w in ipairs(grid_global[y]) do
-          if grid_global[y][x].item == item[5].name then
+          if grid_global[y][x].item == state.item.list[5].name then
             if enemy_ref[j].x == grid_global[y][x].x and enemy_ref[j].y == grid_global[y][x].y then
               enemy_ref[j].life = enemy_ref[j].life - 1
               en_stop_call = "on"
@@ -602,7 +439,7 @@ function items_enemy_effect()
   for j,w in ipairs(enemy_ref) do
     for y,v in ipairs(grid_global) do
       for x,w in ipairs(grid_global[y]) do
-        if grid_global[y][x].item == item[6].name then
+        if grid_global[y][x].item == state.item.list[6].name then
           if func:ma_he(enemy_ref[j],grid_global[y][x]) < 315 and move_ref_in == 0 and enemy_ref[j].comp ~= "dead" then
             enemy_ref[j].comp = "confuse"
             enemy_ref[j].alert_anim = 6
@@ -614,27 +451,27 @@ function items_enemy_effect()
 
   -- incrementando duracao do item 6 - smoke
   if state.turn.current == state.turn.ttype.enemy then
-    if item[6].use == "active" and item[6].dura_control == "off" and item[6].dura > 0 then
-      item[6].dura = item[6].dura - 1
-      item[6].dura_control = "on"
+    if state.item.list[6].use == "active" and state.item.list[6].dura_control == "off" and state.item.list[6].dura > 0 then
+      state.item.list[6].dura = state.item.list[6].dura - 1
+      state.item.list[6].dura_control = "on"
     end
   end
 
-  if item[6].dura == 0 then 
+  if state.item.list[6].dura == 0 then 
     emission_rate = emission_rate - 1
     if emission_rate > 0 then
       p_neblina.p:setEmissionRate(emission_rate)                                                              
     end
     if emission_rate <= 20 then 
-      item[6].use = "off" 
-      item[6].dura = item[6].dura_ref
+      state.item.list[6].use = "off" 
+      state.item.list[6].dura = state.item.list[6].dura_ref
       if enemy_ref[state.enemy.index_comp].comp == "confuse" then
         enemy_ref[state.enemy.index_comp].comp = state.enemy.comp_random[love.math.random(1, 2)] -- escolha de comportamento
         enemy_ref[state.enemy.index_comp].change_comp = "off" -- interrompendo mudança de comportamento
       end -- global function - enemy_comp_coli 
       for y,v in ipairs(grid_global) do
         for x,w in ipairs(grid_global[y]) do
-          if grid_global[y][x].item == item[6].name then
+          if grid_global[y][x].item == state.item.list[6].name then
             grid_global[y][x].item = 0
           end
         end
@@ -643,7 +480,7 @@ function items_enemy_effect()
   end
 
   if state.turn.current ~= state.turn.ttype.enemy then
-    item[6].dura_control = "off"
+    state.item.list[6].dura_control = "off"
   end
 
 end

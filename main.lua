@@ -23,10 +23,10 @@ bresenham = require 'libs/bresenham'
 --///////////////////////////////////////////////////////////////
 
 -- globals
+require 'globals/_strings_db'
+require 'globals/_assets_db'
 require 'globals/_state'
 require 'globals/_functions'
-require 'globals/_assets_db'
-require 'globals/_strings_db'
 
 require 'range_data'
 require "colisions"
@@ -76,7 +76,7 @@ function love.load()
   cen_design_load()
 
   -- assets
-  assets()
+
 
   -- turns and ui
   turn_load()

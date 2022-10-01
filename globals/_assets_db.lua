@@ -2,7 +2,6 @@
 --// FONTS, IMAGES AND MUSIC
 --///////////////////////////////////////////////////////////////
 
-function assets()
   
   asset = {
     
@@ -81,4 +80,3 @@ function assets()
     
   }
   
-end
