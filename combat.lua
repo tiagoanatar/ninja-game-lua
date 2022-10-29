@@ -30,27 +30,27 @@ local function combate_colisoes()
   
   -- activate screen - item
   if state.turn.current == state.turn.ttype.item then
-    if state.combat.item_active == 'on' and state.combat.screen == 'off' then
-      state.combat.screen = 'on'
+    if state.combat.item_active == state.combat.ttype.on and state.combat.screen == state.combat.ttype.off then
+      state.combat.screen = state.combat.ttype.on
       damage_once = 'on'
     end
   end
     
   -- activate screen - enemy
   if state.turn.current == state.turn.ttype.enemy then
-    if state.combat.enemy_active == 'on' and state.combat.screen == 'off' then
+    if state.combat.enemy_active == state.combat.ttype.on and state.combat.screen == state.combat.ttype.off then
       state.combat.enemy_index = state.enemy.index_comp
       enemy = enemy_ref[state.combat.enemy_index]
-      state.combat.screen = 'on'
+      state.combat.screen = state.combat.ttype.on
       damage_once = 'on'
     end
   end
 
   -- activate screen - player
   if state.turn.current == state.turn.ttype.attack then 
-    if state.combat.atack_active == 'on' and state.combat.screen == 'off' then
+    if state.combat.atack_active == state.combat.ttype.on and state.combat.screen == state.combat.ttype.off then
       enemy = enemy_ref[state.combat.enemy_index]
-      state.combat.screen = 'on'
+      state.combat.screen = state.combat.ttype.on
       damage_once = 'on'
     end
   end 
@@ -61,12 +61,12 @@ end
 local function combat_panel_opacity() 
 
   -- ON
-  if state.combat.screen == 'on' and screen_atk.opa < 1 then
+  if state.combat.screen == state.combat.ttype.on and screen_atk.opa < 1 then
     screen_atk.opa = screen_atk.opa + 0.1
   end
 
   -- OFF
-  if state.combat.screen == 'end' and screen_atk.opa > 0 then
+  if state.combat.screen == state.combat.ttype.tend and screen_atk.opa > 0 then
     screen_atk.opa = screen_atk.opa - 0.1
   end
 
@@ -80,7 +80,7 @@ local function combat_damage()
   screen_atk.x = camera.x + 965
 
   -- damage calculation
-  if state.combat.screen == 'on' and damage_once == 'on' then
+  if state.combat.screen == state.combat.ttype.on and damage_once == 'on' then
   
     -- PLAYER - dice rols
     if enemy.comp == 'alert_player' or enemy.comp == 'alert_body' then
@@ -119,21 +119,21 @@ local function combat_damage()
     -- PLAYER - life bar reduction
     anim_player_life_ref = state.player.life_ref/100
     if dice_enem > 0 then
-      state.player.life = state.player.life + item[7].power - dice_enem
-      damage_final = dice_enem - item[7].power
+      state.player.life = state.player.life + state.item.list[7].power - dice_enem
+      damage_final = dice_enem - state.item.list[7].power
     end
 
     state.player.life_dano_ref = damage_final/anim_player_life_ref
     state.player.life_bar_after = math.floor(state.player.life_bar - (0.8 * state.player.life_dano_ref))
 
     -- ITEM UPDATE - armor
-    if dice_enem > 0 and item[7].dura ~= 0 then
-      item[7].dura = item[7].dura - 1
+    if dice_enem > 0 and state.item.list[7].dura ~= 0 then
+      state.item.list[7].dura = state.item.list[7].dura - 1
     end
 
-    if item[7].dura == 0 then
-      item[7].power = 0
-      item[7].use = 'off'
+    if state.item.list[7].dura == 0 then
+      state.item.list[7].power = 0
+      state.item.list[7].use = 'off'
     end
 
     -- END
@@ -221,12 +221,12 @@ local function combate_animacoes()
   end
 
   -- opacidade
-  if timmer_main > 0.5 and state.combat.screen == 'on' and anin_damage_opac < 2 then
+  if timmer_main > 0.5 and state.combat.screen == state.combat.ttype.on and anin_damage_opac < 2 then
     anin_damage_opac = anin_damage_opac + 0.01
   end
 
   -- tamanho do texto
-  if timmer_main > 0.5 and state.combat.screen == 'on' and anin_damage_font > 0.5 then
+  if timmer_main > 0.5 and state.combat.screen == state.combat.ttype.on and anin_damage_font > 0.5 then
     anin_damage_font = anin_damage_font - 0.02
   end
 
@@ -245,7 +245,7 @@ local function combate_animacoes()
   ---------------------------------
 
   if timmer_main > 5 then
-    state.combat.screen = 'end'
+    state.combat.screen = state.combat.ttype.tend
     timmer_main = 0
     -- damage animation
     anin_damage_opac = 0
@@ -263,20 +263,20 @@ local function combate_animacoes()
 
     -- resetando ataque do inimigo
     if state.turn.current == state.turn.ttype.enemy then
-      state.combat.enemy_active = 'off'
-      state.combat.screen = 'off'
+      state.combat.enemy_active = state.combat.ttype.off
+      state.combat.screen = state.combat.ttype.off
     end
 
     -- resetando ataque do item
     if state.turn.current == state.turn.ttype.item then
-      state.combat.item_active = 'off'
-      state.combat.screen = 'off'
+      state.combat.item_active = state.combat.ttype.off
+      state.combat.screen = state.combat.ttype.off
     end
 
     -- resetando ataque do player
     if state.turn == state.turn.ttype.attack then
-      state.combat.atack_active = 'off'
-      state.combat.screen = 'off'
+      state.combat.atack_active = state.combat.ttype.off
+      state.combat.screen = state.combat.ttype.off
     end
 
   end
