@@ -14,6 +14,20 @@ local enemy = {
   
   -- comportment module
   comp_random = {"stop", "path_diago", "sleep"},
+
+  comp_type = {
+    stop = 'stop', 
+    path_diago = 'path_diago',
+    sleep = 'sleep', 
+    dead = 'dead', 
+    alert_desconf = 'alert_desconf', 
+    alert_player = 'alert_player', 
+    alert_body = 'alert_body', 
+    alert_item = 'alert_item', 
+    alert_total = 'alert_total', 
+    confuse = 'confuse' 
+  },
+  
   index_comp = 1,
   
   -- counter module

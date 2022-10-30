@@ -1,5 +1,5 @@
 -- enemy ref holder
-local enemy_ref = state.enemy.list
+local enemy_ref = state.enemy
 
 local timmer_main = 0 -- timmer used in animation
 local dice_rol
@@ -40,7 +40,7 @@ local function combate_colisoes()
   if state.turn.current == state.turn.ttype.enemy then
     if state.combat.enemy_active == state.combat.ttype.on and state.combat.screen == state.combat.ttype.off then
       state.combat.enemy_index = state.enemy.index_comp
-      enemy = enemy_ref[state.combat.enemy_index]
+      enemy = enemy_ref.list[state.combat.enemy_index]
       state.combat.screen = state.combat.ttype.on
       damage_once = 'on'
     end
@@ -49,7 +49,7 @@ local function combate_colisoes()
   -- activate screen - player
   if state.turn.current == state.turn.ttype.attack then 
     if state.combat.atack_active == state.combat.ttype.on and state.combat.screen == state.combat.ttype.off then
-      enemy = enemy_ref[state.combat.enemy_index]
+      enemy = enemy_ref.list[state.combat.enemy_index]
       state.combat.screen = state.combat.ttype.on
       damage_once = 'on'
     end
@@ -83,7 +83,7 @@ local function combat_damage()
   if state.combat.screen == state.combat.ttype.on and damage_once == 'on' then
   
     -- PLAYER - dice rols
-    if enemy.comp == 'alert_player' or enemy.comp == 'alert_body' then
+    if enemy.comp == enemy_ref.comp_type.alert_player or enemy.comp == enemy_ref.comp_type.alert_body then
       
       for x = 1, state.player.atk_power do  
         if x == 1 then dice_player = 0 end -- set damage to zero
@@ -92,17 +92,17 @@ local function combat_damage()
       end
       
       local alerta = love.math.random(1, 2) -- random activation of alert when enemy on state 'alert_body'
-      if enemy.comp == 'alert_body' and alerta == 1 then dice_player = enemy.life end
-      if enemy.comp == 'alert_body' and alerta == 2 then enemy.comp = 'alert_player' end
+      if enemy.comp == enemy_ref.comp_type.alert_body and alerta == 1 then dice_player = enemy.life end
+      if enemy.comp == enemy_ref.comp_type.alert_body and alerta == 2 then enemy.comp = enemy_ref.comp_type.alert_player end
       
     end
       
-    if enemy.comp ~= 'alert_player' and enemy.comp ~= 'alert_body' then 
+    if enemy.comp ~= enemy_ref.comp_type.alert_player and enemy.comp ~= enemy_ref.comp_type.alert_body then 
       dice_player = enemy.life -- instant kill
     end
 
     -- ENEMY - dice rols
-    if enemy.comp == 'alert_player' then
+    if enemy.comp == enemy_ref.comp_type.alert_player then
       for x = 1, enemy.atk_power do
         if x == 1 then dice_enem = 0 end -- set damage to zero
         dice_rol = love.math.random(1, 6)
