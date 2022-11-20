@@ -107,9 +107,9 @@ function play_load()
       
   -- Anim types
   anim_type = {
-    anim8.newAnimation(anim_grid('1-2',1), 1), -- 1 -- parado -- sprites 1 a 2, linha 1, velocidade 0.1
-    anim8.newAnimation(anim_grid('1-4',2), 0.15), -- 2 -- ataque
-    anim8.newAnimation(anim_grid('1-2',3), 0.20) -- 3 -- andando
+    anim8.newAnimation(anim_grid('1-2',1), 1), -- 1 -- stop -- sprites 1 a 2, line 1, speed 0.1
+    anim8.newAnimation(anim_grid('1-4',2), 0.15), -- 2 -- attack
+    anim8.newAnimation(anim_grid('1-2',3), 0.20) -- 3 -- walk
   }
 
   p_alert_grid = anim8.newGrid(20, 19, asset.player.alert_icon:getWidth(), asset.player.alert_icon:getHeight())
@@ -195,11 +195,15 @@ function play_update(dt)
 end
 
 -- ///////////////////////////////////////////////////////////////
---// PLAYER DRAW
+--// DRAW
 --///////////////////////////////////////////////////////////////
 
-function play_draw()
-  
+function player_draw()
+
+  -- sprite do jogador
+  love.graphics.setColor(1, 1, 1, 1)
+  anim_type[state.player.atNumb]:draw(asset.player.main, state.player.x + 22, state.player.y + 15, 0, state.player.scaX, 1, 44, 30) -- 44 e 30 are origin
+
 -- hit box
 --love.graphics.setColor(1, 1, 1, 0.2)
 --love.graphics.rectangle("fill", state.range.fim.x, state.range.fim.y, state.player.w, state.player.h)

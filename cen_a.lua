@@ -122,7 +122,7 @@ function cenario_a_draw()
   love.graphics.draw(texture_draw, texture_quad, -1500, -1500)
     
   -- Base
-  cb_a_base = love.graphics.setColor(1,1,1,1)
+  love.graphics.setColor(1,1,1,1)
   cb_a_base = love.graphics.rectangle("fill", 0, 0, state.cenario.global.w, state.cenario.global.h )
     
   love.graphics.setColor(1,1,1,1)

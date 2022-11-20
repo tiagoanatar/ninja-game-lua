@@ -108,7 +108,7 @@ function love.load()
 
   -- luvem
   Luven.init()
-  Luven.setAmbientLightColor({ 0.5, 0.5, 0.5 })
+  Luven.setAmbientLightColor({ 0.3, 0.3, 0.3 })
   Luven.camera:init(love.graphics.getWidth() / 2, love.graphics.getHeight() / 2) -- center the camera.
   Luven.camera:setScale(1) -- set a x2 zoom on the camera.
 
@@ -209,7 +209,6 @@ function love.draw() -- Carregar e atualizar gráfico
     if cen_control == 1 then  
               
       cenario_a_draw()
-      play_draw()
             
     end
 
@@ -219,7 +218,12 @@ function love.draw() -- Carregar e atualizar gráfico
 
 -- standard camera
   camera:set()
-        
+
+    -- dark move
+    if state.turn.current ~= state.turn.ttype.enemy then 
+      range_draw()
+    end
+
     -- items use
     love.graphics.setColor(1, 1, 1, 1)
     items_draw_use()

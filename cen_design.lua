@@ -1,15 +1,5 @@
--- ///////////////////////////////////////////////////////////////
---// VAR
---///////////////////////////////////////////////////////////////
-
 local wall_rand = 0
 local floor_rand = 0
-
-local function player_draw()
-    -- sprite do jogador
-    love.graphics.setColor(1, 1, 1, 1)
-    anim_type[state.player.atNumb]:draw(asset.player.main, state.player.x + 22, state.player.y + 15, 0, state.player.scaX, 1, 44, 30) -- 44 e 30 são o ponto de origem  
-end
 
 -- ///////////////////////////////////////////////////////////////
 --// LOAD
@@ -322,12 +312,6 @@ player_draw()
         end
       end
       
-      -- LINE TEMPO DRAW
-      if grid_global[y][x].line == true then
-        love.graphics.setColor(0.5,0,0,0.8)
-        love.graphics.rectangle("fill", grid_global[y][x].x, grid_global[y][x].y, 45, 45)
-      end
-      
       -- ITEM TEST 
       --if grid_global[y][x].ttype == "item" then
         --love.graphics.print(grid_global[y][x].item, grid_global[y][x].x + 10, grid_global[y][x].y + 10, 0, 1, 1)
@@ -337,10 +321,5 @@ player_draw()
   end
   
 end
--- dark move
-if state.turn.current ~= state.turn.ttype.enemy then 
-    range_draw()
-end
---
   
 end
