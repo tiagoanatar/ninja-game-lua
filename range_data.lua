@@ -262,8 +262,9 @@ end
 function range_draw()
   
   for i,v in ipairs(r.open) do
+
     if r.open[i].check == "close" and state.turn.current ~= state.turn.ttype.off then
-      love.graphics.setColor(0.34,0.75,0.74,0.8)
+      love.graphics.setColor(0.34,0.75,0.74,0.6)
       love.graphics.rectangle("fill", r.open[i].x, r.open[i].y, r.open[i].w, r.open[i].h)
 
       --love.graphics.setColor(1,1,1,1)
@@ -275,7 +276,7 @@ function range_draw()
 
   -- path final tab
   for i,v in ipairs(r.path_final) do
-    love.graphics.setColor(0.5,0.4,1,0.8)
+    love.graphics.setColor(0,0.35,0.54,0.6)
     love.graphics.rectangle("fill", r.path_final[i].x, r.path_final[i].y, 45, 45)
   end
 

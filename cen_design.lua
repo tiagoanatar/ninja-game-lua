@@ -291,6 +291,11 @@ function cen_design_draw()
 -- enemies
 enemy_a_draw()
 
+-- dark move
+if state.turn.current ~= state.turn.ttype.enemy then 
+  range_draw()
+end
+
 -- player
 player_draw()
 
@@ -321,5 +326,5 @@ player_draw()
   end
   
 end
-  
+
 end

@@ -219,11 +219,6 @@ function love.draw() -- Carregar e atualizar gráfico
 -- standard camera
   camera:set()
 
-    -- dark move
-    if state.turn.current ~= state.turn.ttype.enemy then 
-      range_draw()
-    end
-
     -- items use
     love.graphics.setColor(1, 1, 1, 1)
     items_draw_use()
@@ -242,7 +237,6 @@ function love.draw() -- Carregar e atualizar gráfico
     enemy_alert()
         
   camera:unset()
-
 --------------------------------
 
 -- gui
