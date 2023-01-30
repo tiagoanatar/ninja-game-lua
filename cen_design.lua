@@ -7,9 +7,9 @@ local floor_rand = 0
 
 function cen_design_load()
   
--- wall/floor random
-wall_rand = love.math.random(1, 3)
-floor_rand = love.math.random(1, 3)
+  -- wall/floor random
+  wall_rand = love.math.random(1, 3)
+  floor_rand = love.math.random(1, 3)
   
     c_design = {
       
@@ -99,19 +99,12 @@ floor_rand = love.math.random(1, 3)
     
     
     
--- dojo
-    
-c_design.dojo.clear.floor[1]:setWrap("repeat", "repeat")
-c_design.dojo.clear.floor[2]:setWrap("repeat", "repeat")
-c_design.dojo.clear.floor[3]:setWrap("repeat", "repeat")
-    
-c_design.dojo.wall.top[1]:setWrap("repeat", "repeat")
-c_design.dojo.wall.top[2]:setWrap("repeat", "repeat")
-c_design.dojo.wall.top[3]:setWrap("repeat", "repeat")
-    
-c_design.dojo.wall.low[1]:setWrap("repeat", "repeat")
-c_design.dojo.wall.low[2]:setWrap("repeat", "repeat")
-c_design.dojo.wall.low[3]:setWrap("repeat", "repeat")
+  -- dojo
+  for i = 1, 3 do
+    c_design.dojo.clear.floor[i]:setWrap("repeat", "repeat")
+    c_design.dojo.wall.top[i]:setWrap("repeat", "repeat")
+    c_design.dojo.wall.low[i]:setWrap("repeat", "repeat")
+  end
     
 end
 
