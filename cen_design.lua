@@ -310,7 +310,7 @@ player_draw()
         end
       end
       
-      -- ITEM TEST 
+      -- ITEM TESTE 
       --if grid_global[y][x].ttype == "item" then
         --love.graphics.print(grid_global[y][x].item, grid_global[y][x].x + 10, grid_global[y][x].y + 10, 0, 1, 1)
       --end
